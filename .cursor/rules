@@ -1,0 +1,21 @@
+# ComicAI Cursor Rules
+
+# All Python files must start with their import statements.
+# Use absolute imports rather than relative imports when possible.
+# Use Python 3.8+ syntax.
+# All functions and classes must include docstrings in English.
+# Add comments to explain non-trivial logic.
+# Code must be readable, formatted according to PEP8.
+# Handle exceptions gracefully and display user-friendly error messages.
+# When using APIs, always check and handle response status.
+# Default to function-based structure; use classes only if justified.
+# Prefer type hints for function arguments and return values.
+# For longer tasks, display a progress indicator in the Streamlit UI.
+# The app must use Streamlit for all user interaction.
+# All external dependencies must be listed in requirements.txt **with specific version numbers**.
+# Include an MIT license header at the top of each file.
+# For AI services, prefer free/local options (Ollama, Hugging Face Spaces).
+# Use environment variables for API keys and configuration.
+# Implement proper error handling for AI model failures.
+# Add logging for debugging and monitoring.
+# Follow the single responsibility principle for modules. 
