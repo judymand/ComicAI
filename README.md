@@ -14,8 +14,9 @@
 ### Prerequisites
 
 - Python 3.8 or higher
-- Local LLM setup (Ollama recommended)
-- Stable Diffusion API access (Hugging Face Spaces)
+- **Local LLM setup (Ollama recommended)**
+- **Local Stable Diffusion (default, no API needed)**
+- (Optional) Stable Diffusion API access (Hugging Face Spaces)
 
 ### Installation
 
@@ -30,7 +31,7 @@
    pip install -r requirements.txt
    ```
 
-3. **Set up environment variables** (optional)
+3. **(Optional) Set up environment variables for API**
    ```bash
    # Create .env file
    echo "STABLE_DIFFUSION_API_URL=your_api_url_here" > .env
@@ -53,7 +54,7 @@
 
 1. **📝 Story Input** - Enter your creative idea in the text box
 2. **🤖 Panel Breakdown** - Local LLM splits your story into 3-5 comic panels
-3. **🎨 Image Generation** - Stable Diffusion creates unique illustrations for each panel
+3. **🎨 Image Generation** - **Local Stable Diffusion** creates unique illustrations for each panel (API is only used as a fallback)
 4. **📱 Comic Presentation** - View your comic strip in a beautiful web interface
 5. **💾 Download/Share** - Save your creation in multiple formats
 
@@ -66,12 +67,14 @@ User Story/Idea
     ↓
 Scene Descriptions
     ↓
-[Stable Diffusion API: Generate images]
+[Local Stable Diffusion: Generate images]
     ↓
 Comic Panels
     ↓
 [Streamlit: Display comic strip]
 ```
+
+*If local image generation is unavailable, the app will attempt to use an API, or fallback to placeholders.*
 
 ---
 
@@ -80,7 +83,7 @@ Comic Panels
 ### ✨ Core Features
 - **Simple Story Input** - Just type your idea and let AI do the rest
 - **AI-Powered Panel Generation** - Automatic story breakdown into comic panels
-- **Original Image Creation** - Unique illustrations for each panel
+- **Original Image Creation** - Unique illustrations for each panel (local by default)
 - **Beautiful Web Interface** - Clean, intuitive Streamlit app
 - **Download & Share** - Export your comics in multiple formats
 - **Completely Free** - No paid services required
@@ -104,10 +107,10 @@ Comic Panels
 
 ### Environment Variables
 
-Create a `.env` file in the project root:
+Create a `.env` file in the project root (only needed for API-based image generation):
 
 ```env
-# Image Generation API
+# Image Generation API (optional)
 STABLE_DIFFUSION_API_URL=https://your-api-endpoint.com
 HUGGING_FACE_API_KEY=your_api_key_here
 
@@ -137,6 +140,10 @@ OLLAMA_BASE_URL=http://localhost:11434
    ```bash
    ollama serve
    ```
+
+### Local Stable Diffusion Setup
+- The first time you run the app, the model will be downloaded automatically (4GB+ disk space required).
+- No API key is needed for local image generation.
 
 ---
 
@@ -180,10 +187,9 @@ panels = llm.generate_panel_descriptions("Your story here", num_panels=4)
 
 #### Custom Image Generation
 ```python
-from src.image_generator import ImageGenerator
+from src/local_image_generator import LocalImageGenerator
 
-# Generate single image
-generator = ImageGenerator(api_url="your_api_url")
+generator = LocalImageGenerator()
 image = generator.generate_image("A cat in a garden", style="comic")
 ```
 
@@ -200,7 +206,8 @@ ComicAI/
 │   ├── app.py               # Main Streamlit application
 │   ├── utils.py             # Utility functions
 │   ├── llm_handler.py       # Local LLM integration
-│   └── image_generator.py   # Image generation logic
+│   ├── image_generator.py   # API-based image generation logic
+│   └── local_image_generator.py # Local Stable Diffusion image generation
 ├── assets/                  # Static assets
 ├── tests/                   # Test files
 ├── data/                    # Data storage
@@ -274,9 +281,9 @@ ollama serve
 ```
 
 **Image Generation Fails**
-- Verify your API URL is correct
-- Check your API key is valid
-- Ensure you have sufficient API credits
+- If using local generation, ensure you have enough disk space (4GB+) and patience for the first model download.
+- If using an API, verify your API URL and key are correct and you have sufficient credits.
+- The app will use placeholders if no image generation is available.
 
 **Streamlit App Won't Start**
 ```bash
@@ -305,19 +312,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Hugging Face** - For providing free AI model APIs
 - **Streamlit** - For the amazing web app framework
-- **Stable Diffusion** - For image generation capabilities
+- **Stable Diffusion** - For image generation capabilities (local and API)
 - **Ollama** - For local LLM support
 - **Open Source Community** - For inspiration and support
 
 ---
 
-## 📞 Contact
-
-- **Project Link**: [https://github.com/yourusername/comicai](https://github.com/yourusername/comicai)
-- **Issues**: [GitHub Issues](https://github.com/yourusername/comicai/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/comicai/discussions)
-
----
 
 <div align="center">
 
